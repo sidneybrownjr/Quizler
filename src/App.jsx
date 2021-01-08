@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import './App.css';
+// HTML entity decoder
+const decoder = require('he');
 
+// Open Trivia DB API
 const apiURL =
   'https://opentdb.com/api.php?amount=10&category=31&type=multiple';
 // array to store questions for quiz
@@ -20,8 +23,8 @@ fetch(apiURL)
       // load answers into array
       const answerChoices = [...loadedQuestions.incorrect_answers];
       // object to track location of correct answer and
-      // prevent correct answer from being in the same place
-      // everytime when displayed
+      // prevent correct answer from being in the same place everytime
+      // answers are displayed
       formattedQuestion.answer = Math.floor(Math.random() * 4);
       // splice correct answer into array with incorrect answers
       answerChoices.splice(
@@ -33,7 +36,7 @@ fetch(apiURL)
       // Add answer choices to array
       formattedQuestion.answerChoices = [...answerChoices];
 
-      console.log(formattedQuestion);
+      //console.log(formattedQuestion);
       return formattedQuestion;
     });
     //console.log(questions);
@@ -79,7 +82,11 @@ const App = () => {
             You scored {score} out of {questions.length}
           </div>
           <div>
-            {score / questions.length > 0.7 ? <>you passed</> : <>you failed</>}
+            {score / questions.length > 0.59 ? (
+              <>you passed</>
+            ) : (
+              <>you failed</>
+            )}
           </div>
           <button onClick={handleRestart}>Restart Quiz?</button>
         </>
@@ -90,7 +97,7 @@ const App = () => {
               <span>Question {currentQuestion + 1}</span>/{questions.length}
             </div>
             <div className='question-text'>
-              {questions[currentQuestion].question}
+              {decoder.decode(questions[currentQuestion].question)}
             </div>
           </div>
           <div className='answer-section'>
@@ -107,7 +114,7 @@ const App = () => {
                     )
                   }
                 >
-                  {answerChoice}
+                  {decoder.decode(answerChoice)}
                 </button>
               )
             )}
