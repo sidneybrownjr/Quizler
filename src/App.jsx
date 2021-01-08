@@ -1,53 +1,55 @@
 import React, { useState } from 'react';
 import './App.css';
 
-export default function App() {
-  const questions = [
-    {
-      questionText: 'What is the capital of France?',
-      answerOptions: [
-        { answerText: 'New York', isCorrect: false },
-        { answerText: 'London', isCorrect: false },
-        { answerText: 'Paris', isCorrect: true },
-        { answerText: 'Dublin', isCorrect: false },
-      ],
-    },
-    {
-      questionText: 'Who is CEO of Tesla?',
-      answerOptions: [
-        { answerText: 'Jeff Bezos', isCorrect: false },
-        { answerText: 'Elon Musk', isCorrect: true },
-        { answerText: 'Bill Gates', isCorrect: false },
-        { answerText: 'Tony Stark', isCorrect: false },
-      ],
-    },
-    {
-      questionText: 'The iPhone was created by which company?',
-      answerOptions: [
-        { answerText: 'Apple', isCorrect: true },
-        { answerText: 'Intel', isCorrect: false },
-        { answerText: 'Amazon', isCorrect: false },
-        { answerText: 'Microsoft', isCorrect: false },
-      ],
-    },
-    {
-      questionText: 'How many Harry Potter books are there?',
-      answerOptions: [
-        { answerText: '1', isCorrect: false },
-        { answerText: '4', isCorrect: false },
-        { answerText: '6', isCorrect: false },
-        { answerText: '7', isCorrect: true },
-      ],
-    },
-  ];
+const apiURL =
+  'https://opentdb.com/api.php?amount=10&category=31&type=multiple';
+// array to store questions for quiz
+let questions = [];
 
+fetch(apiURL)
+  .then((res) => {
+    return res.json();
+  })
+  .then((loadedQuestions) => {
+    // unload array returned from API into questions array
+    questions = loadedQuestions.results.map((loadedQuestions) => {
+      // object to store each question with their respective answers
+      const formattedQuestion = {
+        question: loadedQuestions.question,
+      };
+      // load answers into array
+      const answerChoices = [...loadedQuestions.incorrect_answers];
+      // object to track location of correct answer and
+      // prevent correct answer from being in the same place
+      // everytime when displayed
+      formattedQuestion.answer = Math.floor(Math.random() * 4);
+      // splice correct answer into array with incorrect answers
+      answerChoices.splice(
+        formattedQuestion.answer,
+        0,
+        loadedQuestions.correct_answer
+      );
+      // Add array to object to enable mapping for display
+      // Add answer choices to array
+      formattedQuestion.answerChoices = [...answerChoices];
+
+      console.log(formattedQuestion);
+      return formattedQuestion;
+    });
+    //console.log(questions);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
+const App = () => {
   const [takingQuiz, setTakingQuiz] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
 
-  const handleAnswerOptionClick = (isCorrect) => {
-    if (isCorrect) {
+  const handleAnswerOptionClick = (answer) => {
+    if (answer) {
       setScore(score + 1);
     }
 
@@ -88,17 +90,27 @@ export default function App() {
               <span>Question {currentQuestion + 1}</span>/{questions.length}
             </div>
             <div className='question-text'>
-              {questions[currentQuestion].questionText}
+              {questions[currentQuestion].question}
             </div>
           </div>
           <div className='answer-section'>
-            {questions[currentQuestion].answerOptions.map((answerOption) => (
-              <button
-                onClick={() => handleAnswerOptionClick(answerOption.isCorrect)}
-              >
-                {answerOption.answerText}
-              </button>
-            ))}
+            {questions[currentQuestion].answerChoices.map(
+              (answerChoice, index) => (
+                <button
+                  key={index}
+                  onClick={() =>
+                    handleAnswerOptionClick(
+                      answerChoice ===
+                        questions[currentQuestion].answerChoices[
+                          questions[currentQuestion].answer
+                        ]
+                    )
+                  }
+                >
+                  {answerChoice}
+                </button>
+              )
+            )}
           </div>
         </>
       ) : (
@@ -106,4 +118,6 @@ export default function App() {
       )}
     </div>
   );
-}
+};
+
+export default App;
