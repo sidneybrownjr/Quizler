@@ -2,7 +2,7 @@
 
 ![Quizler Logo](./public/images/markdown.png)
 
-Quizler is a quiz application that tests your general knowledge. It is built with React.js and TailwindCSS. The Q&A is populated by [OpenTriviaDB](https://opentdb.com/).
+> Quizler is a quiz application that tests your general knowledge. It is built with React.js and TailwindCSS. The Q&A is populated by [OpenTriviaDB](https://opentdb.com/).
 
 ## Installation
 
