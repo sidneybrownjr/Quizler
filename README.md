@@ -1,4 +1,4 @@
-# React Quiz App 👨🏽‍🏫
+# React Quiz App 🧑‍🏫
 
 ![Quizler Logo](./public/images/markdown.png)
 
