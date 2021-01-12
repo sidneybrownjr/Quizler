@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Loader from 'react-loader-spinner';
+import Timer from './components/Timer';
 import './App.css';
 // HTML entity encoder/decoder
 const decoder = require('he');
@@ -10,16 +11,18 @@ const App = () => {
   const [questions, setQuestions] = useState([]);
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
-  const [category, setCategory] = useState(0);
+  const [chosenCategory, setChosenCategory] = useState(0);
   const [categories, setCategories] = useState([]);
   const [difficulty, setDifficulty] = useState('');
   const [loading, isLoading] = useState(false);
+  const [outOfTime, setOutOfTime] = useState(false);
 
-  const getQuestions = async (category, difficulty) => {
+  const getQuestions = (category, difficulty) => {
+    isLoading(true);
     // Open Trivia DB API
     const apiURL = `https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${difficulty}&type=multiple`;
 
-    await fetch(apiURL)
+    fetch(apiURL)
       .then((res) => {
         return res.json();
       })
@@ -56,15 +59,13 @@ const App = () => {
       .catch((err) => {
         console.error(err);
       });
-
-    isLoading(false);
   };
 
-  const getCategories = async () => {
+  const getCategories = () => {
     // Open Trivia DB API
     const apiURL = `https://opentdb.com/api_category.php`;
 
-    await fetch(apiURL)
+    fetch(apiURL)
       .then((res) => {
         return res.json();
       })
@@ -90,34 +91,38 @@ const App = () => {
   };
 
   const handleQuizStart = () => {
-    isLoading(true);
     setTakingQuiz(true);
-    //getQuestions(category, difficulty);
   };
 
   const handleRestart = (option = 'restart') => {
     setCurrentQuestion(0);
     setScore(0);
     setShowScore(false);
+    setOutOfTime(false);
     if (option === 'difficulty') {
       setTakingQuiz(false);
       setQuestions([]);
     } else if (option === 'category') {
-      setCategory(0);
+      setChosenCategory(0);
       setTakingQuiz(false);
       setDifficulty('');
       setQuestions([]);
     }
   };
-
   useEffect(() => {
     getCategories();
-    getQuestions(category, difficulty);
-  }, [category, difficulty]);
+  }, []);
+
+  useEffect(() => {
+    getQuestions(chosenCategory, difficulty);
+    setTimeout(() => {
+      isLoading(false);
+    }, 1200);
+  }, [chosenCategory, difficulty]);
 
   return (
     <div className='container flex items-center justify-center h-screen w-5/6'>
-      {showScore ? (
+      {showScore || outOfTime ? (
         <div className='flex flex-col w-full h-5/6 items-center'>
           <div className=''>
             {score / questions.length > 0.59 ? (
@@ -175,7 +180,7 @@ const App = () => {
           </div>
         </div>
       ) : takingQuiz ? (
-        loading && !questions ? (
+        loading ? (
           <Loader
             type='Rings'
             color='#00BFFF'
@@ -184,43 +189,55 @@ const App = () => {
             radius={210}
           />
         ) : (
-          <div className='flex flex-col w-2/3 max-w-4/6 content-around h-full'>
-            <div className='h-4/6 flex flex-col justify-center items-center '>
-              <div className='font-body text-indigo-300 w-full h-1/6 flex items-end justify-start border-b-4 border-dotted border-indigo-500 border-opacity-50'>
-                <span className='text-2xl mb-2 '>
-                  Question {currentQuestion + 1}
-                </span>
-                <span className='mb-2 '>/{questions.length}</span>
-              </div>
-              <div className='bg-blue-400 rounded-2xl transform -skew-y-1 font-display font-extrabold tracking-wide leading-relaxed text-4xl text-black text-center h-3/6 w-full my-4 flex justify-center items-center p-5'>
-                <div className='bg-blue-100 rounded-2xl transform skew-y-1 h-full w-full flex justify-center items-center p-5'>
-                  {questions && (
-                    <p>{decoder.decode(questions[currentQuestion].question)}</p>
-                  )}
+          !outOfTime &&
+          questions.length === 10 && (
+            <div className='flex flex-col w-2/3 max-w-4/6 content-around h-full'>
+              <div className='h-4/6 flex flex-col justify-center items-center '>
+                <div className='font-body text-indigo-300 w-full h-1/6 flex items-end justify-between border-b-4 border-dotted border-indigo-500 border-opacity-50'>
+                  <div className='mb-2'>
+                    <span className='text-2xl'>
+                      Question {currentQuestion + 1}
+                    </span>
+                    <span className=''>/{questions.length}</span>
+                  </div>
+                  <Timer
+                    initialSeconds={30}
+                    initialMinutes={1}
+                    callback={setOutOfTime}
+                  />
+                </div>
+                <div className='bg-blue-400 rounded-2xl transform -skew-y-1 font-display font-extrabold tracking-wide leading-relaxed text-4xl text-black text-center h-3/6 w-full my-4 flex justify-center items-center p-5'>
+                  <div className='bg-blue-100 rounded-2xl transform skew-y-1 h-full w-full flex justify-center items-center p-5'>
+                    {questions && (
+                      <p>
+                        {decoder.decode(questions[currentQuestion].question)}
+                      </p>
+                    )}
+                  </div>
                 </div>
               </div>
+              <div className='grid grid-cols-2 grid-flow-row gap-6 justify-center items-center '>
+                {questions[currentQuestion].answerChoices.map(
+                  (answerChoice, index) => (
+                    <button
+                      className='bg-blue-300 bg-opacity-20 hover:bg-blue-500 text-white font-bold rounded-full py-4 px-4 w-full box-border font-body border-4 border-blue-500'
+                      key={index}
+                      onClick={() =>
+                        handleAnswerOptionClick(
+                          answerChoice ===
+                            questions[currentQuestion].answerChoices[
+                              questions[currentQuestion].answer
+                            ]
+                        )
+                      }
+                    >
+                      {decoder.decode(answerChoice)}
+                    </button>
+                  )
+                )}
+              </div>
             </div>
-            <div className='grid grid-cols-2 grid-flow-row gap-6 justify-center items-center '>
-              {questions[currentQuestion].answerChoices.map(
-                (answerChoice, index) => (
-                  <button
-                    className='bg-blue-300 bg-opacity-20 hover:bg-blue-500 text-white font-bold rounded-full py-4 px-4 w-full box-border font-body border-4 border-blue-500'
-                    key={index}
-                    onClick={() =>
-                      handleAnswerOptionClick(
-                        answerChoice ===
-                          questions[currentQuestion].answerChoices[
-                            questions[currentQuestion].answer
-                          ]
-                      )
-                    }
-                  >
-                    {decoder.decode(answerChoice)}
-                  </button>
-                )
-              )}
-            </div>
-          </div>
+          )
         )
       ) : (
         <div className='flex flex-col h-full'>
@@ -247,15 +264,15 @@ const App = () => {
               >
                 Begin Quiz
               </button>
-              {!category ? (
+              {!chosenCategory ? (
                 <>
                   <label className='text-gray-100 text-center text-xl'>
                     Choose a category:
                   </label>
                   <select
                     className='w-full appearance-none rounded-large py-1'
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
+                    value={chosenCategory}
+                    onChange={(e) => setChosenCategory(e.target.value)}
                   >
                     {categories.map((cat, key) => (
                       <option key={key} value={cat.id}>
@@ -340,10 +357,8 @@ export default App;
 To-Do 
 Issue: Sometimes the questions will not load before the render and will say undefined
 Solution: Seems to be fixed if I use useEffect? loads both API prior to me trying to render things
-----------------Features-----------------
-- Time it took to finish the quiz
 -------------Design wise-----------------
-- Make it Mobile Responsive
+- Make it Mobile Responsive  <-- FOLLOWED BY (After mobile, I can deploy)
 - Add animations
 - "Design Idea": When difficulty is click, pulse 'Begin Quiz' button with arrows pointing at it?
 - Separate program into components
@@ -351,18 +366,4 @@ Solution: Seems to be fixed if I use useEffect? loads both API prior to me tryin
 - User can share the result of a quiz on social media
 - Add multiple quizzes to the application. User can select which one to take
 - User can create an account and have all the scores saved in his dashboard. User can complete a quiz multiple times
-*/
-
-/*
-What It Does Currently
-- User can start the quiz by pressing a button
-- User can see a question with 4 possible answers
-- After selecting an answer, display the next question to the User. Do this until the quiz is finished
-- At the end, the User can see the following statistics
-    - How many correct answers did he get
-    - A message showing if he passed or failed the quiz
-- 'change difficulty' or 'try again' option to the end of the quiz
-- Different message if you pass or fail
-- Has Loader state for when API is loading asynchronusly
-- Allows user to choose which category from the DB
 */
