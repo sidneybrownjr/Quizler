@@ -27,7 +27,7 @@ const Timer = (props) => {
   }, [minutes, seconds, callback]);
 
   return (
-    <div className='text-2xl mb-2'>
+    <div className='text-lg md:text-2xl md:mb-2'>
       {minutes === 0 && seconds === 0 ? null : (
         <h1>
           {minutes}
