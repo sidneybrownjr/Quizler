@@ -318,6 +318,12 @@ const App = () => {
                       Hard
                     </button>
                   </div>
+                  <div
+                    className='text-xs text-gray-300 hover:text-white cursor-pointer mt-6'
+                    onClick={() => setChosenCategory(0)}
+                  >
+                    {'<-- Go back and choose another category'}
+                  </div>
                 </>
               )}
             </div>

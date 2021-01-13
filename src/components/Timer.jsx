@@ -30,7 +30,9 @@ const Timer = (props) => {
     <div className='text-2xl mb-2'>
       {minutes === 0 && seconds === 0 ? null : (
         <h1>
-          {minutes}:{seconds < 10 ? `0${seconds}` : seconds} {'Remaining '}
+          {minutes}
+          {' : '}
+          {seconds < 10 ? `0${seconds}` : seconds} {'Remaining '}
         </h1>
       )}
     </div>
