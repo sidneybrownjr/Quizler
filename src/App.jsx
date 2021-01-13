@@ -204,7 +204,7 @@ const App = () => {
                   </div>
                   <Timer
                     initialSeconds={30}
-                    initialMinutes={10}
+                    initialMinutes={1}
                     callback={setOutOfTime}
                   />
                 </div>
