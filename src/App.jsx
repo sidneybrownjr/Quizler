@@ -325,12 +325,17 @@ const App = () => {
                     </>
                   )}
                 </div>
-                <div
-                  className='text-xs md:text-base text-gray-300 hover:text-white cursor-pointer mt-6'
-                  onClick={() => setChosenCategory(0)}
-                >
-                  {'<-- Go back and choose another category'}
-                </div>
+                {chosenCategory ? (
+                  <div
+                    className='text-xs md:text-base text-gray-300 hover:text-white cursor-pointer mt-6'
+                    onClick={() => setChosenCategory(0)}
+                  >
+                    {'<-- Go back and choose another category'}
+                  </div>
+                ) : (
+                  ''
+                )}
+
                 <footer className='h-1/6 md:2/6 flex justify-center items-end text-gray-200 text-xs xl:text-xl py-2'>
                   <div>
                     Created by{' '}
