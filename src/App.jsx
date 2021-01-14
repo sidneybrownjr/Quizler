@@ -376,10 +376,9 @@ Issue: Sometimes the questions will not load before the render and will say unde
 Solution: Seems to be fixed if I use useEffect? loads both API prior to me trying to render things
 -------------Design wise-----------------
 - Add animations
-- "Design Idea": When difficulty is click, pulse 'Begin Quiz' button with arrows pointing at it?
+- When difficulty is click, pulse 'Begin Quiz' button with arrows pointing at it
 - Separate program into components
 -------------Further Extras--------------
 - User can share the result of a quiz on social media
 - Add multiple quizzes to the application. User can select which one to take
-- User can create an account and have all the scores saved in his dashboard. User can complete a quiz multiple times
 */
