@@ -144,20 +144,20 @@ const App = () => {
                 )}
               </div>
               <div className='h-2/5 md:h-1/2 flex flex-col justify-end'>
-                <div className='font-body font-extrabold text-lg md:text-5xl text-white text-center py-3'>
+                <div className='font-body font-extrabold text-lg md:text-2xl lg:text-5xl text-white text-center py-3'>
                   You scored a <em>whopping</em>
-                  <span className='text-indigo-300 text-xl md:text-6xl'>
+                  <span className='text-indigo-300 text-xl md:text-3xl lg:text-6xl'>
                     {' '}
                     {score}
                   </span>{' '}
                   out of
-                  <span className='text-indigo-300 text-xlmd:text-6xl'>
+                  <span className='text-indigo-300 text-xl md:text-3xl lg:text-6xl'>
                     {' '}
                     {questions.length}
                   </span>
                   .
                 </div>
-                <div className='font-body font-bold text-xl md:text-4xl text-white text-center py-3'>
+                <div className='font-body font-bold text-xl lg:text-4xl text-white text-center py-3'>
                   {score / questions.length > 0.59 ? (
                     <>
                       That means you{' '}
@@ -171,7 +171,7 @@ const App = () => {
                   )}
                 </div>
               </div>
-              <div className='grid grid-cols-1 md:grid-cols-3 grid-flow-row gap-2 md:gap-6 items-center py-3 h-1/2 w-5/6'>
+              <div className='grid grid-cols-1 md:grid-cols-3 grid-flow-row gap-2 md:gap-6 items-center py-3 h-1/6 md:h-1/2 w-5/6'>
                 <button
                   className='bg-blue-600 hover:bg-blue-500 text-white text-sm lg:text-2xl font-bold rounded-xl py-3 lg:py-5 px-4 md:my-2 w-5/6 md:w-full md:h-2/6 2xl:h-2/6 xl:h-5/6 justify-self-center'
                   onClick={() => handleRestart('restart')}
@@ -251,7 +251,7 @@ const App = () => {
                     <img src='../images/quizler_logo.png' alt='quizler' />
                   </div>
                 </div>
-                <div className='flex flex-col py-8 px-8 w-5/6 xl:w-1/2 md:h-2/6 mx-auto bg-white justify-center md:justify-evenly bg-opacity-40 rounded-xl shadow-md space-y-2'>
+                <div className='flex flex-col py-2 md:py-8 px-8 w-5/6 xl:w-1/2 h-3/6 md:h-2/6 mx-auto bg-white justify-center md:justify-evenly bg-opacity-40 rounded-xl shadow-md space-y-2'>
                   <button
                     disabled={!difficulty ? 'disabled' : ''}
                     title={
@@ -261,8 +261,8 @@ const App = () => {
                     }
                     className={
                       difficulty
-                        ? 'bg-blue-600 hover:bg-blue-500 text-white text-xl font-bold rounded-xl py-3 px-4 my-2 transition duration-300 '
-                        : 'bg-blue-600 opacity-50 text-white text-xl font-bold rounded-xl py-3 px-4 my-2 transition duration-300 cursor-not-allowed'
+                        ? 'bg-blue-600 hover:bg-blue-500 text-white text-xl font-bold rounded-xl py-3 px-4 my-1 md:my-2 transition duration-300 '
+                        : 'bg-blue-600 opacity-50 text-white text-xl font-bold rounded-xl py-3 px-4 my-1 md:my-2 transition duration-300 cursor-not-allowed'
                     }
                     onClick={handleQuizStart}
                   >
@@ -287,15 +287,15 @@ const App = () => {
                     </>
                   ) : (
                     <>
-                      <div className='text-xl text-gray-100 text-center'>
+                      <div className='text-xs md:text-lg lg:text-xl text-gray-100 text-center'>
                         Select a difficulty below:
                       </div>
                       <div className='grid grid-flow-row grid-cols-1 gap-2 md:grid-cols-3 md:gap-6'>
                         <button
                           className={
                             difficulty === 'easy'
-                              ? 'transition duration-300 ease-in-out bg-green-500 text-white font-bolder rounded-xl py-3 px-4 my-2 transform-gpu scale-125  w-2/3 md:w-full place-self-center'
-                              : 'transition duration-300 ease-in-out bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl py-3 px-4 my-2 transform-gpu scale-100  w-2/3 md:w-full place-self-center'
+                              ? 'transition duration-300 ease-in-out bg-green-500 text-white font-bolder rounded-xl py-3 px-4 my-1 md:my-2 transform-gpu scale-125  w-2/3 md:w-full place-self-center'
+                              : 'transition duration-300 ease-in-out bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl py-3 px-4 my-1 md:my-2 transform-gpu scale-100  w-2/3 md:w-full place-self-center'
                           }
                           onClick={() => setDifficulty('easy')}
                         >
@@ -304,8 +304,8 @@ const App = () => {
                         <button
                           className={
                             difficulty === 'medium'
-                              ? 'transition duration-300 ease-in-out bg-yellow-500 text-white font-bolder rounded-xl py-3 px-4 my-2 transform-gpu scale-125 w-2/3 md:w-full place-self-center'
-                              : 'transition duration-300 ease-in-out bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl py-3 px-4 my-2 transform-gpu scale-100 w-2/3 md:w-full place-self-center'
+                              ? 'transition duration-300 ease-in-out bg-yellow-500 text-white font-bolder rounded-xl py-3 px-4 my-1 md:my-2 transform-gpu scale-125 w-2/3 md:w-full place-self-center'
+                              : 'transition duration-300 ease-in-out bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl py-3 px-4 my-1 md:my-2 transform-gpu scale-100 w-2/3 md:w-full place-self-center'
                           }
                           onClick={() => setDifficulty('medium')}
                         >
@@ -314,22 +314,22 @@ const App = () => {
                         <button
                           className={
                             difficulty === 'hard'
-                              ? 'transition duration-300 ease-in-out bg-red-500 text-white font-bolder rounded-xl py-3 px-4 my-2 transform-gpu scale-125  w-2/3 md:w-full place-self-center'
-                              : 'transition duration-300 ease-in-out bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl py-3 px-4 my-2 transform-gpu scale-100  w-2/3 md:w-full place-self-center'
+                              ? 'transition duration-300 ease-in-out bg-red-500 text-white font-bolder rounded-xl py-3 px-4 my-1 md:my-2 transform-gpu scale-125  w-2/3 md:w-full place-self-center'
+                              : 'transition duration-300 ease-in-out bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl py-3 px-4 my-1 md:my-2 transform-gpu scale-100  w-2/3 md:w-full place-self-center'
                           }
                           onClick={() => setDifficulty('hard')}
                         >
                           Hard
                         </button>
                       </div>
-                      <div
-                        className='text-xs md:text-base text-gray-300 hover:text-white cursor-pointer mt-6'
-                        onClick={() => setChosenCategory(0)}
-                      >
-                        {'<-- Go back and choose another category'}
-                      </div>
                     </>
                   )}
+                </div>
+                <div
+                  className='text-xs md:text-base text-gray-300 hover:text-white cursor-pointer mt-6'
+                  onClick={() => setChosenCategory(0)}
+                >
+                  {'<-- Go back and choose another category'}
                 </div>
                 <footer className='h-2/6 flex justify-center items-end text-gray-200 text-xs xl:text-xl py-2'>
                   <div>
