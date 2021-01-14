@@ -143,21 +143,21 @@ const App = () => {
                   />
                 )}
               </div>
-              <div className='h-1/5 md:h-2/5 lg:h-1/2 flex flex-col justify-end'>
-                <div className='font-body font-extrabold text-lg md:text-2xl lg:text-5xl text-white text-center py-3'>
+              <div className='h-1/5 md:h-2/5 lg:h-1/2 flex flex-col justify-end text-xs'>
+                <div className='font-body font-extrabold  md:text-2xl lg:text-5xl text-white text-center py-3'>
                   You scored a <em>whopping</em>
-                  <span className='text-indigo-300 text-xl md:text-3xl lg:text-6xl'>
+                  <span className='text-indigo-300  md:text-3xl lg:text-6xl'>
                     {' '}
                     {score}
                   </span>{' '}
                   out of
-                  <span className='text-indigo-300 text-xl md:text-3xl lg:text-6xl'>
+                  <span className='text-indigo-300 md:text-3xl lg:text-6xl'>
                     {' '}
                     {questions.length}
                   </span>
                   .
                 </div>
-                <div className='font-body font-bold text-xl lg:text-4xl text-white text-center py-3'>
+                <div className='font-body font-bold text-xs md:text-xl lg:text-4xl text-white text-center md:py-3'>
                   {score / questions.length > 0.59 ? (
                     <>
                       That means you{' '}
@@ -171,21 +171,21 @@ const App = () => {
                   )}
                 </div>
               </div>
-              <div className='grid grid-cols-1 md:grid-cols-3 grid-flow-row gap-2 md:gap-6 items-center py-3 h-1/6 md:h-1/2 w-5/6'>
+              <div className='grid grid-cols-1 md:grid-cols-3 grid-flow-row gap-2 md:gap-6 items-center py-3 h-1/6 md:h-1/2 w-5/6 text-xs md:text-sm'>
                 <button
-                  className='bg-blue-600 hover:bg-blue-500 text-white text-sm lg:text-2xl font-bold rounded-xl py-3 lg:py-5 px-4 md:my-2 w-5/6 md:w-full md:h-2/6 2xl:h-2/6 xl:h-5/6 justify-self-center'
+                  className='bg-blue-600 hover:bg-blue-500 text-white lg:text-2xl font-bold rounded-xl py-3 lg:py-5 px-4 md:my-2 w-5/6 md:w-full md:h-2/6 2xl:h-2/6 xl:h-5/6 justify-self-center'
                   onClick={() => handleRestart('restart')}
                 >
                   Try Again
                 </button>
                 <button
-                  className='bg-blue-600 hover:bg-blue-500 text-white text-sm lg:text-2xl font-bold rounded-xl py-3 lg:py-5 px-4 md:my-2 w-5/6 md:w-full md:h-2/6 2xl:h-2/6 xl:h-5/6 justify-self-center'
+                  className='bg-blue-600 hover:bg-blue-500 text-white lg:text-2xl font-bold rounded-xl py-3 lg:py-5 px-4 md:my-2 w-5/6 md:w-full md:h-2/6 2xl:h-2/6 xl:h-5/6 justify-self-center'
                   onClick={() => handleRestart('category')}
                 >
                   Change Category
                 </button>
                 <button
-                  className='bg-blue-600 hover:bg-blue-500 text-white text-sm lg:text-2xl font-bold rounded-xl py-3 lg:py-5 px-4 md:my-2 w-5/6 md:w-full md:h-2/6 2xl:h-2/6 xl:h-5/6 justify-self-center'
+                  className='bg-blue-600 hover:bg-blue-500 text-white lg:text-2xl font-bold rounded-xl py-3 lg:py-5 px-4 md:my-2 w-5/6 md:w-full md:h-2/6 2xl:h-2/6 xl:h-5/6 justify-self-center'
                   onClick={() => handleRestart('difficulty')}
                 >
                   Change Difficulty
@@ -209,7 +209,7 @@ const App = () => {
                       callback={setOutOfTime}
                     />
                   </div>
-                  <div className='bg-blue-400 rounded-2xl transform -skew-y-1 font-display font-extrabold tracking-wide leading-relaxed md:text-4xl text-black text-center h-4/6 md:h-3/6 w-full my-4 flex justify-center items-center p-5'>
+                  <div className='bg-blue-400 rounded-2xl transform -skew-y-1 font-display font-extrabold tracking-wide leading-relaxed text-xs md:text-4xl text-black text-center h-4/6 md:h-3/6 w-full my-4 flex justify-center items-center p-5'>
                     <div className='bg-blue-100 rounded-2xl transform skew-y-1 h-full w-full flex justify-center items-center p-5'>
                       {questions && (
                         <p>
@@ -219,11 +219,11 @@ const App = () => {
                     </div>
                   </div>
                 </div>
-                <div className='grid grid-cols-1 md:grid-cols-2 grid-flow-row gap-2 md:gap-6 justify-center items-center '>
+                <div className='grid grid-cols-1 md:grid-cols-2 grid-flow-row gap-2 md:gap-4 justify-center items-center '>
                   {questions[currentQuestion].answerChoices.map(
                     (answerChoice, index) => (
                       <button
-                        className='bg-blue-300 bg-opacity-20 hover:bg-blue-500 text-white font-bold rounded-full py-4 px-4 w-full box-border font-body border-4 border-blue-500'
+                        className='bg-blue-300 bg-opacity-20 hover:bg-blue-500 text-xs md:text-base text-white font-bold rounded-full py-2 md:py-4 px-4 w-full box-border font-body border-4 border-blue-500'
                         key={index}
                         onClick={() =>
                           handleAnswerOptionClick(
@@ -251,7 +251,7 @@ const App = () => {
                     <img src='../images/quizler_logo.png' alt='quizler' />
                   </div>
                 </div>
-                <div className='flex flex-col py-2 md:py-8 px-8 w-5/6 xl:w-1/2 h-3/6 md:h-2/6 mx-auto bg-white justify-center md:justify-evenly bg-opacity-40 rounded-xl shadow-md space-y-2'>
+                <div className='flex flex-col py-2 md:py-8 px-8 w-5/6 xl:w-1/2 h-5/6 md:h-2/6 mx-auto bg-white justify-center md:justify-evenly bg-opacity-40 rounded-xl shadow-md space-y-2'>
                   <button
                     disabled={!difficulty ? 'disabled' : ''}
                     title={
@@ -331,7 +331,7 @@ const App = () => {
                 >
                   {'<-- Go back and choose another category'}
                 </div>
-                <footer className='h-2/6 flex justify-center items-end text-gray-200 text-xs xl:text-xl py-2'>
+                <footer className='h-1/6 md:2/6 flex justify-center items-end text-gray-200 text-xs xl:text-xl py-2'>
                   <div>
                     Created by{' '}
                     <a
