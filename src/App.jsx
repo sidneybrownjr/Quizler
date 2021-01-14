@@ -193,7 +193,7 @@ const App = () => {
               </div>
             </div>
           ) : takingQuiz ? (
-            !loading ? (
+            !loading && questions[currentQuestion] !== undefined ? (
               <div className='flex flex-col md:w-5/6 lg:w-2/3 content-around h-full'>
                 <div className='h-1/2 md:h-4/6 flex flex-col justify-center items-center '>
                   <div className='font-body text-indigo-300 w-full h-1/6 flex flex-col-reverse md:flex-row items-end justify-between border-b-4 border-dotted border-indigo-500 border-opacity-50'>
