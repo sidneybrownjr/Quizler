@@ -241,7 +241,7 @@ const App = () => {
                 </div>
               </div>
             ) : (
-              'Page loaded incorrectly'
+              <div className='text-white text-xl'>Please refresh the page</div>
             )
           ) : (
             <div className='flex flex-col h-full'>
