@@ -143,7 +143,7 @@ const App = () => {
                   />
                 )}
               </div>
-              <div className='h-2/5 md:h-1/2 flex flex-col justify-end'>
+              <div className='h-1/5 md:h-2/5 lg:h-1/2 flex flex-col justify-end'>
                 <div className='font-body font-extrabold text-lg md:text-2xl lg:text-5xl text-white text-center py-3'>
                   You scored a <em>whopping</em>
                   <span className='text-indigo-300 text-xl md:text-3xl lg:text-6xl'>
@@ -261,8 +261,8 @@ const App = () => {
                     }
                     className={
                       difficulty
-                        ? 'bg-blue-600 hover:bg-blue-500 text-white text-xl font-bold rounded-xl py-3 px-4 my-1 md:my-2 transition duration-300 '
-                        : 'bg-blue-600 opacity-50 text-white text-xl font-bold rounded-xl py-3 px-4 my-1 md:my-2 transition duration-300 cursor-not-allowed'
+                        ? 'bg-blue-600 hover:bg-blue-500 text-white text-xs md:text-xl font-bold rounded-xl py-3 px-4 my-1 md:my-2 transition duration-300 '
+                        : 'bg-blue-600 opacity-50 text-white text-xs md:text-xl font-bold rounded-xl py-3 px-4 my-1 md:my-2 transition duration-300 cursor-not-allowed'
                     }
                     onClick={handleQuizStart}
                   >
@@ -290,7 +290,7 @@ const App = () => {
                       <div className='text-xs md:text-lg lg:text-xl text-gray-100 text-center'>
                         Select a difficulty below:
                       </div>
-                      <div className='grid grid-flow-row grid-cols-1 gap-2 md:grid-cols-3 md:gap-6'>
+                      <div className='grid grid-flow-row grid-cols-1 gap-2 md:grid-cols-3 md:gap-6 text-xs md:text-base'>
                         <button
                           className={
                             difficulty === 'easy'
