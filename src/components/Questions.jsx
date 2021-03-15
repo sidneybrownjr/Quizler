@@ -81,10 +81,10 @@ const Questions = (props) => {
             width={420}
             radius={210}
           />
-          <h6 className='text-center text-white text-xs md:text-lg lg:text-xl'>
+          <p className='text-center text-white text-xs md:text-lg lg:text-xl'>
             If you've had enough time to read this, it's likely the API didn't
             return anything... <br /> 😬 Try refreshing.
-          </h6>
+          </p>
         </div>
       )}
     </>

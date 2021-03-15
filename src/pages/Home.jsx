@@ -19,7 +19,7 @@ const Home = (props) => {
   return (
     <div className='flex flex-col h-full w-5/6'>
       <div className='flex flex-col justify-center items-center h-full'>
-        <div className='w-4/6 h-2/6 md:w-5/6 md:h-3/6 flex justify-center items-center '>
+        <div className='w-4/6 h-1/6 md:w-5/6 md:h-3/6 flex justify-center items-center '>
           <div className='items-center'>
             <img src='../images/quizler_logo.png' alt='quizler' />
           </div>

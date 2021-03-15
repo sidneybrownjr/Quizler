@@ -29,7 +29,7 @@ const Results = (props) => {
 
   return (
     <div className='flex flex-col w-full h-full items-center justify-around'>
-      <div className='h-2/6'>
+      <div className='h-1/6 md:h-2/6'>
         {score / questions.length > 0.59 ? (
           <img src='../images/win.gif' alt='trophy' />
         ) : (
@@ -66,7 +66,7 @@ const Results = (props) => {
           )}
         </div>
       </div>
-      <div className='grid grid-cols-1 md:grid-cols-3 grid-flow-row gap-2 md:gap-6 items-center py-3 h-1/6 md:h-1/2 w-5/6 text-xs md:text-sm'>
+      <div className='grid grid-cols-1 md:grid-cols-3 grid-flow-row gap-2 md:gap-6 items-center md:py-3 h-1/6 md:h-1/2 w-5/6 text-xs md:text-sm'>
         <button
           className='bg-blue-600 hover:bg-blue-500 text-white lg:text-2xl font-bold rounded-xl py-3 lg:py-5 px-4 md:my-2 w-5/6 md:w-full md:h-2/6 2xl:h-2/6 xl:h-2/5 justify-self-center'
           onClick={() => handleRestart('restart')}
