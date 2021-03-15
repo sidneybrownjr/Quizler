@@ -29,7 +29,7 @@ const Results = (props) => {
 
   return (
     <div className='flex flex-col w-full h-full items-center justify-around'>
-      <div className=''>
+      <div className='h-2/6'>
         {score / questions.length > 0.59 ? (
           <img src='../images/win.gif' alt='trophy' />
         ) : (

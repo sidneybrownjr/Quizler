@@ -19,7 +19,7 @@ const Home = (props) => {
   return (
     <div className='flex flex-col h-full w-5/6'>
       <div className='flex flex-col justify-center items-center h-full'>
-        <div className='w-5/6 h-3/6 flex justify-center items-center '>
+        <div className='w-4/6 h-2/6 md:w-5/6 md:h-3/6 flex justify-center items-center '>
           <div className='items-center'>
             <img src='../images/quizler_logo.png' alt='quizler' />
           </div>
@@ -32,8 +32,8 @@ const Home = (props) => {
             }
             className={
               difficulty
-                ? 'bg-blue-600 hover:bg-blue-500 text-white text-xs md:text-xl font-bold rounded-xl py-3 px-4 my-1 md:my-2 transition duration-300 '
-                : 'bg-blue-600 opacity-50 text-white text-xs md:text-xl font-bold rounded-xl py-3 px-4 my-1 md:my-2 transition duration-300 cursor-not-allowed'
+                ? 'bg-blue-600 hover:bg-blue-500 text-white text-xs md:text-xl font-bold rounded-xl py-1 px-4 my-2 md:py-2 md:my-2 transition duration-300 '
+                : 'bg-blue-600 opacity-50 text-white text-xs md:text-xl font-bold rounded-xl py-1 px-4 my-2 md:py-2 md:my-2 transition duration-300 cursor-not-allowed'
             }
             onClick={handleQuizStart}
           >
@@ -41,7 +41,7 @@ const Home = (props) => {
           </button>
           {!chosenCategory ? (
             <>
-              <div className='text-gray-100 text-center text-xl'>
+              <div className='text-gray-100 text-center text-base md:text-xl'>
                 Choose a category:
               </div>
               <CategoriesContainer
