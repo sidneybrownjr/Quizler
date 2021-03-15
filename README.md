@@ -21,9 +21,7 @@ $ npm start
 
 #### Design Wise
 
-- Add animations
-- When 'Begin Quiz' is enabled, add an arrow pointing to it
-- Separate program into components
+- Separate program into components [ ✅ ]
 
 #### Further Extras
 
