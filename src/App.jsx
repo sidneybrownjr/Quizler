@@ -2,7 +2,6 @@ import { useState } from 'react';
 import Home from './pages/Home';
 import Quiz from './pages/Quiz';
 import Results from './pages/Results';
-import './App.css';
 
 function App() {
   const [takingQuiz, setTakingQuiz] = useState(false);
