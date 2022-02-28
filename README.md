@@ -16,14 +16,3 @@ Navigate to the folder location inside a terminal and input the following comman
 $ npm install
 $ npm start
 ```
-
-### To-Do ☑️
-
-#### Design Wise
-
-- Separate program into components [ ✅ ]
-
-#### Further Extras
-
-- User can share the result of a quiz on social media
-- Add multiple quizzes to the application. User can select which one to take [ ✅ ]
