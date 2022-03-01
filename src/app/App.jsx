@@ -1,35 +1,23 @@
-import React, { lazy, Suspense } from "react";
+import { Container } from "@chakra-ui/react";
 import { Routes, Route } from "react-router-dom";
-
-const Options = lazy(() => import("../features/options/Options"));
-const QuizQuestions = lazy(() => import("../features/questions/Questions"));
-const Result = lazy(() => import("../features/results/Results"));
+import { Options } from "../features/options/Options";
+import { QuizQuestions } from "../features/questions/Questions";
+import { Result } from "../features/results/Results";
 
 function App() {
   return (
-    <div className="container flex items-center justify-center h-screen w-5/6 p-8">
-      <Router>
-        <Routes>
-          <Route index element={<Options />} />
-          <Route
-            path="quiz"
-            element={
-              <Suspense fallback={<></>}>
-                <QuizQuestions />
-              </Suspense>
-            }
-          />
-          <Route
-            path="results"
-            element={
-              <Suspense fallback={<></>}>
-                <Result />
-              </Suspense>
-            }
-          />
-        </Routes>
-      </Router>
-    </div>
+    <Container
+      display="flex"
+      alignItems="center"
+      justifyContent="space-evenly"
+      h={"100vh"}
+    >
+      <Routes>
+        <Route index element={<Options />} />
+        <Route path="quiz" element={<QuizQuestions />} />
+        <Route path="results" element={<Result />} />
+      </Routes>
+    </Container>
   );
 }
 
