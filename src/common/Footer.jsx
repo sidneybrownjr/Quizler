@@ -1,30 +1,20 @@
-const Footer = () => {
+import { Box, Text, Link } from "@chakra-ui/react";
+import { ExternalLinkIcon } from "@chakra-ui/icons";
+
+export const Footer = () => {
   return (
-    <footer className="h-auto flex justify-center items-end text-gray-200 text-xs xl:text-xl py-2 text-center">
-      <div className="w-full">
-        <hr className="mb-1 opacity-25" />
+    <Box h="5vh">
+      <Text color="gray.50" verticalAlign="bottom">
         Created by{" "}
-        <a
-          className="hover:text-blue-400"
-          target="_blank"
-          rel="noreferrer"
-          href="https://sidneybrownjr.com"
-        >
-          Sidney
-        </a>{" "}
+        <Link href="https://sidneybrownjr.com" isExternal>
+          Sidney <ExternalLinkIcon mx="2px" />
+        </Link>
         with{" "}
-        <a
-          className="hover:text-blue-400"
-          target="_blank"
-          rel="noreferrer"
-          href="https://opentdb.com/"
-        >
-          OpenTriviaDB
-        </a>
+        <Link href="https://opentdb.com/" isExternal>
+          OpenTriviaDB <ExternalLinkIcon mx="2px" />
+        </Link>
         .
-      </div>
-    </footer>
+      </Text>
+    </Box>
   );
 };
-
-export default Footer;
