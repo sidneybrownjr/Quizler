@@ -19,8 +19,20 @@ export const apiSlice = createApi({
       transformResponse: (response) => response.trivia_categories,
     }),
     getQuestions: builder.query({
-      query: ({ category, difficulty, type }) =>
-        `/api.php?amount=10&category=${category}&difficulty=${difficulty}&type=${type}`,
+      query: ({ category, difficulty, type }) => {
+        let url = "/api.php?amount=10";
+        if (category) {
+          url += category;
+        }
+        if (difficulty) {
+          url += difficulty;
+        }
+        if (type) {
+          url += type;
+        }
+        return url;
+      },
+      keepUnusedDataFor: 15,
       transformResponse: (response) =>
         // reformat results to include the answers in the object
         response.results?.map((questions, index) => {

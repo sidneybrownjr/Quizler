@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  category: 9,
-  difficulty: "easy",
-  type: "multiple",
+  category: "",
+  difficulty: "",
+  type: "",
   score: 0,
 };
 
@@ -12,13 +12,19 @@ const optionsSlice = createSlice({
   initialState,
   reducers: {
     changeCategory: (state, action) => {
-      state.category = action.payload;
+      state.category = action.payload.length
+        ? `&category=${action.payload}`
+        : action.payload;
     },
     changeDifficulty: (state, action) => {
-      state.difficulty = action.payload;
+      state.difficulty = action.payload.length
+        ? `&difficulty=${action.payload}`
+        : action.payload;
     },
     changeType: (state, action) => {
-      state.type = action.payload;
+      state.type = action.payload.length
+        ? `&type=${action.payload}`
+        : action.payload;
     },
     changeScore: (state, action) => {
       state.score = action.payload;
