@@ -12,7 +12,7 @@ function App() {
       alignItems="center"
       justifyContent="space-evenly"
       flexDir="column"
-      h={"100vh"}
+      h="100vh"
     >
       <Routes>
         <Route index element={<Options />} />

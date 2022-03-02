@@ -64,16 +64,16 @@ export const Options = () => {
     content = (
       <>
         <SelectField
-          label={"category"}
+          label="category"
           options={categories}
           onChange={handleChange}
         />
         <SelectField
-          label={"difficulty"}
+          label="difficulty"
           options={difficulty}
           onChange={handleChange}
         />
-        <SelectField label={"type"} options={types} onChange={handleChange} />
+        <SelectField label="type" options={types} onChange={handleChange} />
         <Button
           colorScheme="blue"
           onClick={() => navigate("/quiz")}
@@ -88,7 +88,7 @@ export const Options = () => {
   }
 
   return (
-    <Stack spacing={8} m={2}>
+    <Stack spacing={8} p={2} h="95vh" align="center" justify="center">
       <Box>
         <img className="" src="../images/quizler_logo.png" alt="quizler" />
       </Box>
