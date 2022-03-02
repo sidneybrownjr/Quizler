@@ -5,7 +5,15 @@ import { useGetQuestionsQuery } from "../api/apiSlice";
 import { changeScore } from "../options/optionsSlice";
 import { Answers } from "../answers/Answers";
 import { QueryError } from "../../common/QueryError";
-import { Stack, Heading, Text, Flex, Spacer, Spinner } from "@chakra-ui/react";
+import {
+  Stack,
+  Heading,
+  Text,
+  Flex,
+  Spacer,
+  Spinner,
+  useToast,
+} from "@chakra-ui/react";
 
 const decoder = require("he").decode;
 
@@ -22,10 +30,13 @@ export const QuizQuestions = () => {
   const [disabled, setDisabled] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const toast = useToast();
+
   // retrieve query parameters stored in store
   const { category, difficulty, type, score } = useSelector(
     (state) => state.options
   );
+
   // retrieve questions from RTK Query slice
   const {
     data: questions,
@@ -44,10 +55,21 @@ export const QuizQuestions = () => {
     setDisabled(true);
 
     if (e.target.name === correctAnswer) {
-      console.log("Correct");
+      toast({
+        title: "Correct!",
+        status: "success",
+        duration: 1500,
+        isClosable: true,
+      });
       dispatch(changeScore(score + 1));
     } else {
-      console.log("Wrong!");
+      toast({
+        title: "Wrong!",
+        description: `Correct answer is ${correctAnswer}.`,
+        status: "error",
+        duration: 1500,
+        isClosable: true,
+      });
     }
     // delay question change so user can see the correct answer
     questionIndex < 9
