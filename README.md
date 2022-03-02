@@ -13,6 +13,6 @@ If you're interested in running this locally, follow the instructions below.
 Navigate to the folder location inside a terminal and input the following commands:
 
 ```sh
-$ npm install
-$ npm start
+$ yarn
+$ yarn start
 ```
