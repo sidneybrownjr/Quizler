@@ -1,6 +1,11 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { changeScore } from "../options/optionsSlice";
+import {
+  changeCategory,
+  changeDifficulty,
+  changeType,
+  changeScore,
+} from "../options/optionsSlice";
 import { Stack, Heading, Button } from "@chakra-ui/react";
 
 export const Result = () => {
@@ -10,13 +15,17 @@ export const Result = () => {
   const { score } = useSelector((state) => state.options);
 
   const returnToHome = () => {
+    // return state to og condition
+    dispatch(changeCategory(""));
+    dispatch(changeDifficulty(""));
+    dispatch(changeType(""));
     dispatch(changeScore(0));
     navigate("/");
   };
 
   return (
-    <Stack spacing={8}>
-      <Heading as="h1" color={"gray.50"}>
+    <Stack spacing={8} h="95vh" justify="center">
+      <Heading as="h1" color="gray.50">
         Final Score: {score}
       </Heading>
       <Button colorScheme="blue" onClick={() => returnToHome()} isFullWidth>
