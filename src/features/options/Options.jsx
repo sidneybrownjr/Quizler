@@ -75,10 +75,11 @@ export const Options = () => {
         />
         <SelectField label="type" options={types} onChange={handleChange} />
         <Button
-          color="gray.100"
+          color="blue.900"
           backgroundColor="#949BFF"
           _hover={{
             background: "#707AFF",
+            color: "gray.200",
           }}
           onClick={() => navigate("/quiz")}
           isFullWidth
@@ -94,7 +95,12 @@ export const Options = () => {
   return (
     <Stack spacing={8} p={2} h="95vh" align="center" justify="center">
       <Box>
-        <img className="" src="../images/quizler_logo.png" alt="quizler" />
+        <img
+          width="640"
+          height="360"
+          src="../images/quizler_logo.png"
+          alt="quizler"
+        />
       </Box>
       <Stack align="center" spacing={3} h={256}>
         {content}
