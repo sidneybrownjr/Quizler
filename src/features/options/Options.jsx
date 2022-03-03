@@ -75,7 +75,11 @@ export const Options = () => {
         />
         <SelectField label="type" options={types} onChange={handleChange} />
         <Button
-          colorScheme="blue"
+          color="gray.100"
+          backgroundColor="#949BFF"
+          _hover={{
+            background: "#707AFF",
+          }}
           onClick={() => navigate("/quiz")}
           isFullWidth
         >
