@@ -8,7 +8,7 @@ import {
 } from "../options/optionsSlice";
 import { Stack, Heading, Button } from "@chakra-ui/react";
 
-export const Result = () => {
+export default function Result() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -33,4 +33,4 @@ export const Result = () => {
       </Button>
     </Stack>
   );
-};
+}

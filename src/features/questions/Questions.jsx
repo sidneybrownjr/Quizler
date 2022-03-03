@@ -25,7 +25,7 @@ const Question = ({ question }) => {
   );
 };
 
-export const QuizQuestions = () => {
+export default function QuizQuestions() {
   const [questionIndex, setQuestionIndex] = useState(0);
   const [disabled, setDisabled] = useState(false);
   const navigate = useNavigate();
@@ -128,4 +128,4 @@ export const QuizQuestions = () => {
       {content}
     </Stack>
   );
-};
+}
