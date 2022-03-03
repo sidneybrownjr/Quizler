@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useGetQuestionsQuery } from "../api/apiSlice";
 import { changeScore } from "../options/optionsSlice";
 import { Answers } from "../answers/Answers";
-import { QueryError } from "../../common/QueryError";
 import {
   Stack,
   Heading,
@@ -95,7 +94,7 @@ export default function QuizQuestions() {
     );
   } else if (isSuccess) {
     content = !questions.length ? (
-      <QueryError />
+      navigate("/error")
     ) : (
       <Fragment>
         <Flex h="10vh">

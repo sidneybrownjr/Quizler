@@ -24,11 +24,21 @@ export default function Result() {
   };
 
   return (
-    <Stack spacing={8} h="95vh" justify="center">
-      <Heading as="h1" color="gray.50">
+    <Stack spacing={8} h="95vh" justify="center" align="center" w="100%">
+      <Heading as="h1" color="gray.50" textAlign="center">
         Final Score: {score}
       </Heading>
-      <Button colorScheme="blue" onClick={() => returnToHome()} isFullWidth>
+      <Button
+        p="28px"
+        color="blue.900"
+        backgroundColor="#949BFF"
+        _hover={{
+          background: "#707AFF",
+          color: "gray.200",
+        }}
+        w={["100%", "50%"]}
+        onClick={() => returnToHome()}
+      >
         Return to Homepage
       </Button>
     </Stack>

@@ -7,7 +7,7 @@ import {
 } from "../features/options/optionsSlice";
 import { Stack, Heading, Button } from "@chakra-ui/react";
 
-export const QueryError = () => {
+export default function QueryError() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -20,13 +20,23 @@ export const QueryError = () => {
   };
 
   return (
-    <Stack align="center" justify="center" spacing={4}>
+    <Stack spacing={8} h="95vh" justify="center" align="center">
       <Heading as="h1" color="gray.50" textAlign="center">
         No results were found for those parameters.
       </Heading>
-      <Button colorScheme="blue" onClick={() => returnToHome()}>
+      <Button
+        p="28px"
+        color="blue.900"
+        backgroundColor="#949BFF"
+        _hover={{
+          background: "#707AFF",
+          color: "gray.200",
+        }}
+        onClick={() => returnToHome()}
+        w={["100%", "50%"]}
+      >
         Return to Homepage
       </Button>
     </Stack>
   );
-};
+}

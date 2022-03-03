@@ -75,6 +75,7 @@ export const Options = () => {
         />
         <SelectField label="type" options={types} onChange={handleChange} />
         <Button
+          p="28px"
           color="blue.900"
           backgroundColor="#949BFF"
           _hover={{

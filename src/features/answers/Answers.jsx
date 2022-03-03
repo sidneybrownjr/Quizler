@@ -16,7 +16,12 @@ export const Answers = ({
         isDisabled={disabled}
         name={answer}
         key={index + answer}
-        colorScheme="blue"
+        color="blue.900"
+        backgroundColor="#949BFF"
+        _hover={{
+          background: "#707AFF",
+          color: "gray.200",
+        }}
         onClick={(e) => onClick(e, correctAnswer)}
         style={{
           whiteSpace: "normal",
