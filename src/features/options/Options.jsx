@@ -98,7 +98,7 @@ export const Options = () => {
         <img
           width="640"
           height="360"
-          src="../images/quizler_logo.png"
+          src="../images/quizler_logo.webp"
           alt="quizler"
         />
       </Box>
