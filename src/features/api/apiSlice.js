@@ -1,17 +1,9 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
-/*
-    Code 0: Success Returned results successfully.
-    Code 1: No Results Could not return results. The API doesn't have enough questions for your query. (Ex. Asking for 50 Questions in a Category that only has 20.)
-    Code 2: Invalid Parameter Contains an invalid parameter. Arguements passed in aren't valid. (Ex. Amount = Five)
-    Code 3: Token Not Found Session Token does not exist.
-    Code 4: Token Empty Session Token has returned all possible questions for the specified query. Resetting the Token is necessary.
-*/
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const apiSlice = createApi({
-  reducerPath: "api",
+  reducerPath: 'api',
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://opentdb.com",
+    baseUrl: 'https://opentdb.com',
   }),
   endpoints: (builder) => ({
     getCategories: builder.query({
@@ -20,7 +12,7 @@ export const apiSlice = createApi({
     }),
     getQuestions: builder.query({
       query: ({ category, difficulty, type }) => {
-        let url = "/api.php?amount=10";
+        let url = '/api.php?amount=10';
         if (category) {
           url += category;
         }
@@ -34,30 +26,34 @@ export const apiSlice = createApi({
       },
       keepUnusedDataFor: 15,
       transformResponse: (response) =>
-        // reformat results to include the answers in the object
+        // original response has correct and incorrect answers in separate key/values
+        // reformat results to include all answers inside one array
+        /*
+        reformattedQuestion = {
+          id: ,
+          question: ,
+          answer: ,
+          answerChoices: 
+        }
+        */
         response.results?.map((questions, index) => {
-          // object to store each question with their respective answers
-          const formattedQuestion = {
+          const reformattedQuestion = {
+            id: index,
             question: questions.question,
+            answer: questions.correct_answer,
           };
-          formattedQuestion.id = index;
-          // load answers into array
-          const answerChoices = [...questions.incorrect_answers];
-          // object to track location of correct answer and
-          // prevent correct answer from being in the same place everytime
-          // answers are displayed
-          formattedQuestion.answer = questions.correct_answer;
-          // splice correct answer into array with incorrect answers
+
+          let answerChoices = questions.incorrect_answers.slice();
+
           answerChoices.splice(
             Math.floor(Math.random() * 4),
             0,
             questions.correct_answer
           );
-          // Add array to object to enable mapping for display
-          // Add answer choices to array
-          formattedQuestion.answerChoices = [...answerChoices];
 
-          return formattedQuestion;
+          reformattedQuestion.answerChoices = answerChoices;
+
+          return reformattedQuestion;
         }),
     }),
   }),
