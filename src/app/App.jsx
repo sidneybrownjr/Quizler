@@ -1,11 +1,13 @@
-import { Suspense, lazy } from "react";
-import { Container, Spinner } from "@chakra-ui/react";
-import { Routes, Route } from "react-router-dom";
-import { Footer } from "../common/Footer";
-import { Options } from "../features/options/Options";
-const QueryError = lazy(() => import("../common/QueryError"));
-const QuizQuestions = lazy(() => import("../features/questions/Questions"));
-const Result = lazy(() => import("../features/results/Results"));
+import { Suspense, lazy } from 'react';
+import { Container } from '@chakra-ui/react';
+import { Routes, Route } from 'react-router-dom';
+import { LoadingSpinner } from '../common/Spinner';
+import { Options } from '../features/options/Options';
+import { Footer } from '../common/Footer';
+
+const QuizQuestions = lazy(() => import('../features/questions/Questions'));
+const Result = lazy(() => import('../features/results/Results'));
+const PageNotFound = lazy(() => import('../common/PageNotFound'));
 
 function App() {
   return (
@@ -16,63 +18,14 @@ function App() {
       flexDir="column"
       h="100vh"
     >
-      <Routes>
-        <Route index element={<Options />} />
-        <Route
-          path="quiz"
-          element={
-            <Suspense
-              fallback={
-                <Spinner
-                  thickness="4px"
-                  speed="0.60s"
-                  emptyColor="gray.200"
-                  color="blue.500"
-                  boxSize={20}
-                />
-              }
-            >
-              <QuizQuestions />
-            </Suspense>
-          }
-        />
-        <Route
-          path="results"
-          element={
-            <Suspense
-              fallback={
-                <Spinner
-                  thickness="4px"
-                  speed="0.60s"
-                  emptyColor="gray.200"
-                  color="blue.500"
-                  boxSize={20}
-                />
-              }
-            >
-              <Result />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/error"
-          element={
-            <Suspense
-              fallback={
-                <Spinner
-                  thickness="4px"
-                  speed="0.60s"
-                  emptyColor="gray.200"
-                  color="blue.500"
-                  boxSize={20}
-                />
-              }
-            >
-              <QueryError />
-            </Suspense>
-          }
-        />
-      </Routes>
+      <Suspense fallback={<LoadingSpinner />}>
+        <Routes>
+          <Route index element={<Options />} />
+          <Route path="/quiz" element={<QuizQuestions />} />
+          <Route path="/results" element={<Result />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </Suspense>
       <Footer />
     </Container>
   );
