@@ -1,24 +1,18 @@
-import { Fragment, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { useGetQuestionsQuery } from "../api/apiSlice";
-import { changeScore } from "../options/optionsSlice";
-import { Answers } from "../answers/Answers";
-import {
-  Stack,
-  Heading,
-  Text,
-  Flex,
-  Spacer,
-  Spinner,
-  useToast,
-} from "@chakra-ui/react";
+import { Fragment, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useGetQuestionsQuery } from '../api/apiSlice';
+import { changeScore } from '../options/optionsSlice';
+import { Answers } from '../answers/Answers';
+import { LoadingSpinner } from '../../common/Spinner';
+import { NoResults } from '../../common/NoResults';
+import { Stack, Heading, Text, Flex, Spacer, useToast } from '@chakra-ui/react';
 
-const decoder = require("he").decode;
+const decoder = require('he').decode;
 
 const Question = ({ question }) => {
   return (
-    <Text fontSize={["xl", "2xl", "4xl"]} color="gray.50" h="60%">
+    <Text fontSize={['xl', '2xl', '4xl']} color="gray.50" h="60%">
       {decoder(question)}
     </Text>
   );
@@ -27,6 +21,7 @@ const Question = ({ question }) => {
 export default function QuizQuestions() {
   const [questionIndex, setQuestionIndex] = useState(0);
   const [disabled, setDisabled] = useState(false);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const toast = useToast();
@@ -53,19 +48,19 @@ export default function QuizQuestions() {
   const handleAnswer = (e, correctAnswer) => {
     setDisabled(true);
 
-    if (e.target.name === correctAnswer) {
+    if (String(e.target.name) === String(correctAnswer)) {
       toast({
-        title: "Correct!",
-        status: "success",
+        title: 'Correct!',
+        status: 'success',
         duration: 1500,
         isClosable: true,
       });
       dispatch(changeScore(score + 1));
     } else {
       toast({
-        title: "Wrong!",
+        title: 'Wrong!',
         description: `Correct answer is ${correctAnswer}.`,
-        status: "error",
+        status: 'error',
         duration: 1500,
         isClosable: true,
       });
@@ -77,24 +72,15 @@ export default function QuizQuestions() {
           setDisabled(false);
         }, 1500)
       : setTimeout(() => {
-          navigate("/results");
+          navigate('/results');
         }, 1500);
   };
 
   if (isLoading) {
-    content = (
-      <Spinner
-        thickness="4px"
-        speed="0.60s"
-        emptyColor="gray.200"
-        color="blue.500"
-        boxSize={20}
-        alignSelf="center"
-      />
-    );
+    content = <LoadingSpinner />;
   } else if (isSuccess) {
     content = !questions.length ? (
-      navigate("/error")
+      <NoResults />
     ) : (
       <Fragment>
         <Flex h="10vh">
@@ -119,7 +105,11 @@ export default function QuizQuestions() {
       </Fragment>
     );
   } else if (isError) {
-    content = <Heading>{error}</Heading>;
+    content = (
+      <Heading as="h1" color="gray.50" textAlign="center">
+        {error}
+      </Heading>
+    );
   }
 
   return (

@@ -1,10 +1,11 @@
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { useGetCategoriesQuery } from "../api/apiSlice";
-import { changeCategory, changeDifficulty, changeType } from "./optionsSlice";
-import { Box, Button, Spinner } from "@chakra-ui/react";
-import { Stack } from "@chakra-ui/react";
-import { SelectField } from "../../common/SelectField";
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useGetCategoriesQuery } from '../api/apiSlice';
+import { changeCategory, changeDifficulty, changeType } from './optionsSlice';
+import { Box, Stack, Heading } from '@chakra-ui/react';
+import { LoadingSpinner } from '../../common/Spinner';
+import { SelectField } from '../../common/SelectField';
+import { Button } from '../../common/Button';
 
 export const Options = () => {
   const navigate = useNavigate();
@@ -13,15 +14,15 @@ export const Options = () => {
   let content;
 
   // options for quiz "Difficulty"
-  const difficulty = [
-    { id: "easy", name: "Easy" },
-    { id: "medium", name: "Medium" },
-    { id: "hard", name: "Hard" },
+  const difficulties = [
+    { id: 'easy', name: 'Easy' },
+    { id: 'medium', name: 'Medium' },
+    { id: 'hard', name: 'Hard' },
   ];
   // options for quiz "Type"
   const types = [
-    { id: "multiple", name: "Multiple Choice" },
-    { id: "boolean", name: "True / False" },
+    { id: 'multiple', name: 'Multiple Choice' },
+    { id: 'boolean', name: 'True / False' },
   ];
 
   const {
@@ -34,16 +35,16 @@ export const Options = () => {
 
   // uses the name of the node to dispatch the appropriate action
   const handleChange = (e) => {
-    let nodeName = e.target.name;
+    let nodeName = String(e.target.name);
     switch (nodeName) {
-      case "category":
-        dispatch(changeCategory(e.target.value));
+      case 'category':
+        dispatch(changeCategory(String(e.target.value)));
         break;
-      case "difficulty":
-        dispatch(changeDifficulty(e.target.value));
+      case 'difficulty':
+        dispatch(changeDifficulty(String(e.target.value)));
         break;
-      case "type":
-        dispatch(changeType(e.target.value));
+      case 'type':
+        dispatch(changeType(String(e.target.value)));
         break;
       default:
         return;
@@ -51,15 +52,7 @@ export const Options = () => {
   };
 
   if (isLoading) {
-    content = (
-      <Spinner
-        thickness="4px"
-        speed="0.60s"
-        emptyColor="gray.200"
-        color="blue.500"
-        boxSize={20}
-      />
-    );
+    content = <LoadingSpinner />;
   } else if (isSuccess) {
     content = (
       <>
@@ -70,27 +63,21 @@ export const Options = () => {
         />
         <SelectField
           label="difficulty"
-          options={difficulty}
+          options={difficulties}
           onChange={handleChange}
         />
         <SelectField label="type" options={types} onChange={handleChange} />
-        <Button
-          p="28px"
-          color="blue.900"
-          backgroundColor="#949BFF"
-          _hover={{
-            background: "#707AFF",
-            color: "gray.200",
-          }}
-          onClick={() => navigate("/quiz")}
-          isFullWidth
-        >
+        <Button onClick={() => navigate('/quiz')} w={['100%']}>
           Begin Quiz
         </Button>
       </>
     );
   } else if (isError) {
-    content = <div>{error}</div>;
+    content = (
+      <Heading as="h1" color="gray.50" textAlign="center">
+        {error}
+      </Heading>
+    );
   }
 
   return (

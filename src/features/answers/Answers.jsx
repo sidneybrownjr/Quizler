@@ -1,6 +1,7 @@
-import { SimpleGrid, Button, Text } from "@chakra-ui/react";
+import { SimpleGrid } from '@chakra-ui/react';
+import { Button } from '../../common/Button';
 
-const decoder = require("he").decode;
+const decoder = require('he').decode;
 
 export const Answers = ({
   correctAnswer,
@@ -9,27 +10,19 @@ export const Answers = ({
   disabled,
 }) => (
   <SimpleGrid columns={[1, 2]} spacing={[4, 8]}>
-    {answerChoices?.map((answer, index) => (
-      <Button
-        p="28px"
-        size="lg"
-        isDisabled={disabled}
-        name={answer}
-        key={index + answer}
-        color="blue.900"
-        backgroundColor="#949BFF"
-        _hover={{
-          background: "#707AFF",
-          color: "gray.200",
-        }}
-        onClick={(e) => onClick(e, correctAnswer)}
-        style={{
-          whiteSpace: "normal",
-          wordWrap: "break-word",
-        }}
-      >
-        <Text fontSize="sm">{decoder(answer)}</Text>
-      </Button>
-    ))}
+    {answerChoices?.map((answer, index) => {
+      return (
+        <Button
+          name={answer}
+          key={index + answer}
+          fontSize="sm"
+          w={['100%']}
+          onClick={(e) => onClick(e, correctAnswer)}
+          isDisabled={disabled}
+        >
+          {decoder(answer)}
+        </Button>
+      );
+    })}
   </SimpleGrid>
 );
